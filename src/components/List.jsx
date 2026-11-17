@@ -30,20 +30,22 @@ export default function List(props) {
 
   return (
     <div className='w-full flex justify-between items-center gap-3 border-t-2 border-purple-200'>
-      <label
-        ref={labelRef}
-        htmlFor={`task-${item.id}`}
-        className='w-full p-4 flex items-center gap-3'>
-        <input
-          onChange={handleChange}
-          ref={inputRef}
-          type='checkbox'
-          name='task'
-          id={`task-${item.id}`}
-        />
-        <span>{item.todo}</span>
-      </label>
-      <div>
+      <div className='truncate'>
+        <label
+          ref={labelRef}
+          htmlFor={`task-${item.id}`}
+          className='w-full p-4 flex items-center gap-3'>
+          <input
+            onChange={handleChange}
+            ref={inputRef}
+            type='checkbox'
+            name='task'
+            id={`task-${item.id}`}
+          />
+          <span className='truncate'>{item.todo}</span>
+        </label>
+      </div>
+      <div className='w-fit'>
         <button
           onClick={handleDeleteList}
           type='button'
