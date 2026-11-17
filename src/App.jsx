@@ -32,7 +32,7 @@ export default function App() {
   }, [list]);
 
   return (
-    <div className='w-full min-h-dvh bg-purple-950 flex justify-center pt-20'>
+    <div className='w-full min-h-dvh bg-purple-950 flex justify-center items-center'>
       <Card>
         <Form onSubmit={handleSubmit} />
         <div className='w-full h-full flex flex-col items-center overflow-y-auto scrollbar-thin'>
