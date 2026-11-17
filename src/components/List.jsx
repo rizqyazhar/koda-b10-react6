@@ -1,3 +1,4 @@
+import { useRef } from "react";
 import { FaTrashAlt } from "react-icons/fa";
 
 export default function List(props) {
@@ -14,10 +15,32 @@ export default function List(props) {
     setList([...filteredData]);
   };
 
+  const labelRef = useRef();
+  const inputRef = useRef();
+
+  const handleChange = () => {
+    const checkBoxValue = inputRef.current.checked;
+
+    if (checkBoxValue) {
+      labelRef.current.style.textDecoration = "line-through";
+    } else {
+      labelRef.current.style.textDecoration = "none";
+    }
+  };
+
   return (
     <div className='w-full flex justify-between items-center gap-3 border-t-2 border-purple-200'>
-      <label htmlFor='task-1' className='w-full p-4 flex items-center gap-3'>
-        <input type='checkbox' name='task' id='task-1' />
+      <label
+        ref={labelRef}
+        htmlFor={`task-${item.id}`}
+        className='w-full p-4 flex items-center gap-3'>
+        <input
+          onChange={handleChange}
+          ref={inputRef}
+          type='checkbox'
+          name='task'
+          id={`task-${item.id}`}
+        />
         <span>{item.todo}</span>
       </label>
       <div>
