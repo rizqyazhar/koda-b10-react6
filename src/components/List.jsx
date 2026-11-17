@@ -1,17 +1,24 @@
 import { FaTrashAlt } from "react-icons/fa";
 
 export default function List(props) {
-  const { id, todo } = props.item;
+  const { item, setList } = props;
 
   const handleDeleteList = () => {
-    console.log(id);
+    const data = JSON.parse(window.localStorage.getItem("todo-list"));
+
+    if (data.length === 0) return;
+
+    const filteredData = data.filter((list) => list.id !== item.id);
+    console.log(filteredData);
+
+    setList([...filteredData]);
   };
 
   return (
     <div className='w-full flex justify-between items-center gap-3 border-t-2 border-purple-200'>
       <label htmlFor='task-1' className='w-full p-4 flex items-center gap-3'>
         <input type='checkbox' name='task' id='task-1' />
-        <span>{todo}</span>
+        <span>{item.todo}</span>
       </label>
       <div>
         <button

@@ -7,16 +7,18 @@ export default function App() {
   const [list, setList] = useState(
     JSON.parse(window.localStorage.getItem("todo-list")) || [],
   );
+  const [getId, setGetId] = useState(0);
 
   const handleSubmit = (e) => {
     e.preventDefault();
 
     const formData = new FormData(e.target);
     const input = formData.get("input");
-    const randomId = Math.floor(Math.random() * 100 + 1);
+
+    setGetId(getId + 1);
 
     const collectList = {
-      id: randomId,
+      id: getId,
       todo: input,
     };
 
@@ -34,8 +36,8 @@ export default function App() {
       <Card>
         <Form onSubmit={handleSubmit} />
         <div className='w-full h-full flex flex-col items-center overflow-y-auto scrollbar-thin'>
-          {list.map((item) => {
-            return <List key={item.id} item={item} />;
+          {list.map((item, index) => {
+            return <List key={index} item={item} setList={setList} />;
           })}
         </div>
       </Card>
