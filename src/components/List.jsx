@@ -1,17 +1,13 @@
 import { useRef } from "react";
-import useLocalStorage from "../hooks/useLocalStorage";
 import { FaTrashAlt } from "react-icons/fa";
 
 export default function List(props) {
-  const { item, setList } = props;
-  const { data } = useLocalStorage("todo-list");
+  const { item, setData, data } = props;
 
   const handleDeleteList = () => {
-    console.log(data);
     const filteredData = data.filter((data) => data.id !== item.id);
-    console.log(filteredData);
 
-    setList([...filteredData]);
+    setData(filteredData);
   };
 
   const labelRef = useRef();
