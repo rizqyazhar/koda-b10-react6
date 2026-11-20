@@ -1,12 +1,13 @@
 import { useEffect, useState } from "react";
+import useLocalStorage from "./hooks/useLocalStorage";
 import Card from "./components/Card";
 import Form from "./components/Form";
 import List from "./components/List";
 
 export default function App() {
-  const [list, setList] = useState(
-    JSON.parse(window.localStorage.getItem("todo-list")) || [],
-  );
+  const { data, setItem } = useLocalStorage("todo-list");
+
+  const [list, setList] = useState(data || []);
   const [getId, setGetId] = useState(0);
 
   const handleSubmit = (e) => {
@@ -28,8 +29,8 @@ export default function App() {
   };
 
   useEffect(() => {
-    window.localStorage.setItem("todo-list", JSON.stringify(list));
-  }, [list]);
+    setItem(list);
+  }, [list, setItem]);
 
   return (
     <div className='w-full min-h-dvh bg-purple-950 flex justify-center items-center'>
